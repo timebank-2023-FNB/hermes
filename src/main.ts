@@ -13,8 +13,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle("Example API")
-    .setDescription("The example API description")
+    .setTitle("Hermes API")
+    .setDescription("The Hermes API description")
     .setVersion("1.0")
     .addTag("example")
     .build();
