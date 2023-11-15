@@ -1,0 +1,26 @@
+name: Bun CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Bun
+        uses: actions/setup-node@v1
+        with:
+          node-version: "18.x"
+      - name: Install Bun
+        run: curl https://bun.sh/install | bash
+      - name: Install dependencies with Bun
+        run: ~/.bun/bin/bun install
+      - name: Build with Bun
+        run: ~/.bun/bin/bun run build
+      - name: Test with Bun
+        run: ~/.bun/bin/bun test
