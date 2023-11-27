@@ -1,10 +1,12 @@
-import { Sse } from "@nestjs/common";
-import { TransactionEvent } from "./dto/transaction.dto";
-import { Observable, of } from "rxjs";
+import { Controller, Sse } from "@nestjs/common";
+import { EventService } from "./event.service";
 
+@Controller("transaction")
 export class EventController {
-  @Sse("/transaction")
-  onTransaction(transaction: TransactionEvent): Observable<TransactionEvent> {
-    return of(transaction);
+  private constructor(private readonly eventService: EventService) {}
+
+  @Sse()
+  onTransaction() {
+    return this.eventService.sendEvents();
   }
 }
