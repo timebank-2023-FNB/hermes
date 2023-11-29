@@ -7,7 +7,7 @@ import { EventService } from "src/event/event.service";
 export class BankService {
   private constructor(private readonly eventService: EventService) {}
 
-  //   async transfer(dto: TransactionDto) {
-  //     const bankRes = await axios.post("bank.com", dto);
-  //   }
+  async transfer(dto: TransactionDto) {
+    const bankRes = await axios.post("bank.com", dto);
+  }
 }
