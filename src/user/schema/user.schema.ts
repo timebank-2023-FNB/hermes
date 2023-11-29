@@ -10,7 +10,7 @@ export class User {
   uid: string;
 
   @Prop({ default: 0 })
-  balance: number;
+  balance?: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
