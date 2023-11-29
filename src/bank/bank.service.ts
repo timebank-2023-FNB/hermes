@@ -12,8 +12,11 @@ export class BankService {
     @InjectModel(Log.name) private logModel: Model<LogDocument>,
   ) {}
 
-  async log(op: string, from?: string, to?: string, amount?: string) {
-    const log = new this.logModel({ op, from, to, amount });
+  async log(
+    op: string,
+    detail?: { from?: string; to?: string; amount?: string },
+  ) {
+    const log = new this.logModel({ op, ...detail });
     await log.save();
   }
 

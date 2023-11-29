@@ -23,7 +23,7 @@ export class BankController {
     @Param("payId") payId: string,
     @Param("bankAccount") bankAccount: string,
   ) {
-    this.bankService.log("check_balance", bankAccount);
+    this.bankService.log("check_balance", { from: bankAccount });
     return { data: this.bankService.getBalance(payId, bankAccount) };
   }
 
@@ -32,12 +32,11 @@ export class BankController {
     @Param("payId") payId: string,
     @Body() transactionDto: TransactionDto,
   ) {
-    this.bankService.log(
-      "transfer",
-      transactionDto.fromBankAccount,
-      transactionDto.toBankAccount,
-      transactionDto.amount,
-    );
+    this.bankService.log("transfer", {
+      from: transactionDto.fromBankAccount,
+      to: transactionDto.toBankAccount,
+      amount: transactionDto.amount,
+    });
     return { data: this.bankService.transfer(payId, transactionDto) };
   }
 }
