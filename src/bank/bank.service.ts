@@ -2,10 +2,20 @@ import { Injectable } from "@nestjs/common";
 import TransactionDto from "./dto/transaction.dto";
 import axios from "axios";
 import { API_BANK } from "src/config";
+import { Model } from "mongoose";
+import { Log, LogDocument } from "../logger/log.schema";
+import { InjectModel } from "@nestjs/mongoose";
 
 @Injectable()
 export class BankService {
-  private constructor() {}
+  private constructor(
+    @InjectModel(Log.name) private logModel: Model<LogDocument>,
+  ) {}
+
+  async log(op: string, from?: string, to?: string, amount?: string) {
+    const log = new this.logModel({ op, from, to, amount });
+    await log.save();
+  }
 
   async registerPayApp() {
     const response = await axios.post(`${API_BANK}/mock/pay/register`, {});

@@ -9,10 +9,12 @@ export class BankController {
   @Post("/pay-id")
   async registerPayId() {
     const payId = await this.bankService.registerPayApp();
+    this.bankService.log("register_pay_id");
     return { data: payId };
   }
   @Post("/:pay-id/account/issue")
   async getAccount(@Param("payId") payId: string) {
+    this.bankService.log("issue_account");
     return { data: this.bankService.issueAccount(payId) };
   }
 
@@ -21,6 +23,7 @@ export class BankController {
     @Param("payId") payId: string,
     @Param("bankAccount") bankAccount: string,
   ) {
+    this.bankService.log("check_balance", bankAccount);
     return { data: this.bankService.getBalance(payId, bankAccount) };
   }
 
@@ -29,6 +32,12 @@ export class BankController {
     @Param("payId") payId: string,
     @Body() transactionDto: TransactionDto,
   ) {
+    this.bankService.log(
+      "transfer",
+      transactionDto.fromBankAccount,
+      transactionDto.toBankAccount,
+      transactionDto.amount,
+    );
     return { data: this.bankService.transfer(payId, transactionDto) };
   }
 }
