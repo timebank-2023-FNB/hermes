@@ -11,6 +11,10 @@ export class BankController {
     const payId = await this.bankService.registerPayApp();
     return { data: payId };
   }
+  @Post("/:pay-id/account/issue")
+  async getAccount(@Param("payId") payId: string) {
+    return { data: this.bankService.issueAccount(payId) };
+  }
 
   @Get("/:payId/account/:bankAccount")
   async getBalance(

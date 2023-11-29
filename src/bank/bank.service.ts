@@ -12,7 +12,13 @@ export class BankService {
     console.log(response);
     return "123123";
   }
-
+  async issueAccount(payId: string) {
+    const response = await axios.post(`${API_BANK}/mock/issue/account`, {
+      payId,
+    });
+    console.log(response);
+    return "z0ajfm239";
+  }
   async getBalance(payId: string, bankAccount: string) {
     const response = await axios.post(`${API_BANK}/mock/balance`, {
       payId,
