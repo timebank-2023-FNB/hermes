@@ -1,11 +1,13 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { BankService } from "./bank.service";
 import TransactionDto from "./dto/transaction.dto";
+import { ApiTags, ApiOperation } from "@nestjs/swagger";
 
+@ApiTags("bank")
 @Controller("/bank")
 export class BankController {
   constructor(private readonly bankService: BankService) {}
-
+  @ApiOperation({ summary: "Get a PayID for the Pay app." })
   @Post("/pay-id")
   async registerPayId() {
     const payId = await this.bankService.registerPayApp();
