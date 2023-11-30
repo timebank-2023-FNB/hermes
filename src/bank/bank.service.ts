@@ -8,7 +8,7 @@ import { InjectModel } from "@nestjs/mongoose";
 
 @Injectable()
 export class BankService {
-  private constructor(
+  public constructor(
     @InjectModel(Log.name) private logModel: Model<LogDocument>,
   ) {}
 

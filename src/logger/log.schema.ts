@@ -11,13 +11,13 @@ export class Log {
   @Prop({ required: true })
   op: string;
 
-  @Prop({ required: true })
+  @Prop()
   from?: string;
 
-  @Prop({ required: true })
+  @Prop()
   to?: string;
 
-  @Prop({ required: true })
+  @Prop()
   amount?: string;
 }
 
