@@ -11,12 +11,11 @@ jobs:
 
     steps:
 
+      - uses: actions/checkout@v2
+
       - name: Change Directory
         run: |
           cd /home/dkadmin/hermes
-
-      - uses: actions/checkout@v2
-
 
       - name: Docker Compose Up
         run: |
