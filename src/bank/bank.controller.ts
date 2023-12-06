@@ -6,13 +6,13 @@ import TransactionDto from "./dto/transaction.dto";
 export class BankController {
   constructor(private readonly bankService: BankService) {}
 
-  @Post("/pay-id")
+  @Post("/pay/issue")
   async registerPayId() {
     const payId = await this.bankService.registerPayApp();
     this.bankService.log("register_pay_id");
     return { data: payId };
   }
-  @Post("/:pay-id/account/issue")
+  @Post("/:payId/account/issue")
   async getAccount(@Param("payId") payId: string) {
     this.bankService.log("issue_account");
     return { data: this.bankService.issueAccount(payId) };
